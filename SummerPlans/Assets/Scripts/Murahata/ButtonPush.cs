@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonPush : MonoBehaviour {
 
+    public string sceneName;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,6 +20,6 @@ public class ButtonPush : MonoBehaviour {
     //ボタンが押されたらシーンを切り替える処理
     public void ButtonPushed()
     {
-        SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene(sceneName);
     }
 }

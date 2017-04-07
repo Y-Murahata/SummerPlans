@@ -9,8 +9,8 @@ public class ButtonPush : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        gameObject.SetActive(true);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,6 +20,21 @@ public class ButtonPush : MonoBehaviour {
     //ボタンが押されたらシーンを切り替える処理
     public void ButtonPushed()
     {
-        SceneManager.LoadScene(sceneName);
+        if(sceneName != null)
+        {
+            SceneManager.LoadScene(sceneName);
+
+            //  押されたら消える
+            gameObject.SetActive(false);
+
+            Debug.Log("シーンを"+sceneName+"に切り替える");
+        }
+        else
+        {
+            Debug.Log("シーンが選ばれていません");
+        }
+ 
+
+
     }
 }

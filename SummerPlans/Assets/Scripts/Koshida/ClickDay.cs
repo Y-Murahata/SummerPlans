@@ -24,20 +24,28 @@ public class ClickDay : MonoBehaviour {
 
             RaycastHit2D hit = Physics2D.Raycast(point, Vector2.zero);
 
+            //オブジェクトに当たった時
             if (hit)
             {
-                if(_first_num < 0)
+                CalenderManager cm = cm_obj.GetComponent<CalenderManager>();
+
+                //一回目の選択がまだだったら
+                if (_first_num < 0)
                 {
                     _first_num = int.Parse(hit.collider.name);
+                    if(cm.IsSelected(_first_num))
+                    {
+                        _first_num = -1;
+                        return;
+                    }
                     GameObject obj = hit.collider.gameObject;
                     obj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.5f, 0.5f, 1.0f);
                 }
                 else
                 {
-                    CalenderManager cm = cm_obj.GetComponent<CalenderManager>();
-
                     _second_num = int.Parse(hit.collider.name);
-                    cm.ChangeColor(_first_num, _second_num);
+                    
+                    cm.SelectDay(_first_num, _second_num);
                     _first_num = -1;
                     _second_num = -1;
                 }

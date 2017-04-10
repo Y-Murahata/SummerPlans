@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CalenderManager : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class CalenderManager : MonoBehaviour {
 
     public  static int[] _1Pday_state;
     public static int[] _2Pday_state;
+
+    public GameObject calender;
 
     // Use this for initialization
     void Start () {
@@ -35,13 +38,13 @@ public class CalenderManager : MonoBehaviour {
             _2Pday_obj[i] = GameObject.Find("2PDays/" + (i).ToString());
         }
     }
+
     public void NextTurn()
     {
-        first_num = -1;
-        second_num = -1;
-        select_num = 0;
 
-        CountDown.count = CountDown.round_time[round_count];
+        this.GetComponent<AudioSource>().Play();
+
+        calender.GetComponent<SlideCalender>().SlideIn();
 
         if (turn_flag)
         {
@@ -55,9 +58,15 @@ public class CalenderManager : MonoBehaviour {
             round_count++;
             if(round_count >= 3)
             {
-
+                SceneManager.LoadScene("ResultScene");
             }
         }
+
+        CountDown.count = CountDown.round_time[round_count];
+
+        first_num = -1;
+        second_num = -1;
+        select_num = 0;
     }
 
     void CollationPlan()
@@ -161,7 +170,7 @@ public class CalenderManager : MonoBehaviour {
                 second_num = day_num;
 
                 //選択範囲が一週間以上ならば
-                if (Mathf.Abs(first_num - second_num) > 7)
+                if (Mathf.Abs(first_num - second_num) > 6)
                 {
                     if(turn_flag)
                         _1Pday_state[first_num] = 0;

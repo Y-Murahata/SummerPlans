@@ -12,6 +12,6 @@ public class RemainingPlans : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.GetComponent<Text>().text = "残り : " + (3 - CalenderManager.select_num).ToString();
+        this.GetComponent<Text>().text = "残り : " + (CalenderManager.select_num).ToString();
 	}
 }

@@ -10,9 +10,12 @@ public class ResultManeger : MonoBehaviour {
 
     public GameObject _1P_text;
     public GameObject _2P_text;
+    public GameObject MVP_sign;
 
     // Use this for initialization
     void Start () {
+
+        MVP_sign.SetActive(false);
 
         //  プレイヤーたちのスコアを保存
         for (int i = 0; i < 31; i++)
@@ -39,6 +42,24 @@ public class ResultManeger : MonoBehaviour {
         //  テキストをスコアに書き換える
         _1P_text.GetComponent<Text>().text = "1P　スコア　　" + (_1P_count).ToString();
         _2P_text.GetComponent<Text>().text = "2P　スコア　　" + (_2P_count).ToString();
+
+        //  スコアの多いプレイヤーを検出
+        if (_1P_count > _2P_count)
+        {
+            MVP_sign.transform.position = new Vector3(-4.851f, 2.47f);
+            //  王冠マークを表示
+            MVP_sign.SetActive(true);
+        }
+        else if(_1P_count < _2P_count)
+        {
+            MVP_sign.transform.position = new Vector3(-4.851f, -0.09f);
+            //  王冠マークを表示
+            MVP_sign.SetActive(true);
+        }
+        else if (_1P_count == _2P_count)
+        {
+
+        }
 
     }
 }

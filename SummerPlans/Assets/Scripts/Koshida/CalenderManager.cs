@@ -58,7 +58,7 @@ public class CalenderManager : MonoBehaviour {
             round_count++;
             if(round_count >= 3)
             {
-                SceneManager.LoadScene("ResultScene");
+                SceneManager.LoadScene("Result");
             }
         }
 

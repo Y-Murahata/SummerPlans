@@ -7,11 +7,14 @@ public class ButtonPush : MonoBehaviour
 {
 
     public string sceneName;
+    private GameObject titleSprite;
+    public float stopTime;
 
     // Use this for initialization
     void Start()
     {
         gameObject.SetActive(true);
+        titleSprite = GameObject.Find("title");
     }
 
     // Update is called once per frame
@@ -29,9 +32,13 @@ public class ButtonPush : MonoBehaviour
             //  タイトルシーンの時
             if(SceneManager.GetActiveScene().name == "Title")
             {
+                //  タイトル画像の非表示
+                titleSprite.SetActive(false);
+                //  アニメーションの実行
                 AnimationSprite();
-
-                Invoke("ChengeScene", 3.0f);
+                //  シーン切り替えを遅延実行
+                Invoke("ChengeScene", stopTime);
+                
 
             }
             if (SceneManager.GetActiveScene().name == "Result")
@@ -41,8 +48,6 @@ public class ButtonPush : MonoBehaviour
             }
 
            
-
-
             //  ボタンは押されたら消える
             gameObject.SetActive(false);
 
@@ -82,51 +87,4 @@ public class ButtonPush : MonoBehaviour
 
 }
 
-//    //  画像を拡大する関数
-//    private void ResizeSprite()
-//    {
-//        //  カレンダーの画像を取得
-//        GameObject calender = GameObject.Find("TITLEcalendar");
-
-//        //  スプライトレンダーを取得
-//        SpriteRenderer sr = calender.GetComponent<SpriteRenderer>();
-
-//        bool reSizeFlag1 = false;
-//        bool reSizeFlag2 = false;
-
-//        while (true)
-//        {
-//            //  毎フレーム画像を真ん中にする
-//            Vector3 camPos = Camera.main.transform.position;                //  カメラの座標
-//            camPos.z = 0;                                                   //  奥行きはなし
-//            calender.transform.position = camPos;                                    //  真ん中に移動
-
-
-//            //  カレンダーのスケールが指定地(画面いっぱい)になるまで拡大
-//            if (calender.transform.localScale.x <= 1.3f)
-//            {
-//                calender.transform.localScale.Set(calender.transform.localScale.x + 0.1f, calender.transform.localScale.y, calender.transform.localScale.z);
-//            }
-//            else
-//            {
-//                reSizeFlag1 = true;
-//            }
-//            if (calender.transform.localScale.y <= 1.5f)
-//            {
-//                calender.transform.localScale.Set(calender.transform.localScale.x, calender.transform.localScale.y + 0.1f, calender.transform.localScale.z);
-//            }
-//            else
-//            {
-//                reSizeFlag2 = true;
-//            }
-
-//            //  両方リサイズできたらループを抜ける
-//            if(reSizeFlag1 == true && reSizeFlag2 ==  true)
-//            {
-//                break;
-//            }
-//        }
-
-//    }
-//}
 

@@ -8,8 +8,8 @@ public class ResultManeger : MonoBehaviour {
     private int _1P_count = 0;
     private int _2P_count = 0;
 
-    GameObject _1P_text;
-    GameObject _2P_text;
+    public GameObject _1P_text;
+    public GameObject _2P_text;
 
     // Use this for initialization
     void Start () {
@@ -37,8 +37,8 @@ public class ResultManeger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //  テキストをスコアに書き換える
-        _1P_text.GetComponent<Text>().text = "1P　スコア　　" + _1P_count;
-        _2P_text.GetComponent<Text>().text = "2P　スコア　　" + _2P_count;
+        _1P_text.GetComponent<Text>().text = "1P　スコア　　" + (_1P_count).ToString();
+        _2P_text.GetComponent<Text>().text = "2P　スコア　　" + (_2P_count).ToString();
 
     }
 }

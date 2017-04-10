@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RemainingPlans : MonoBehaviour {
+public class ShowRound : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +12,6 @@ public class RemainingPlans : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.GetComponent<Text>().text = "残り予定数 : " + (3 - CalenderManager.select_num).ToString();
+        this.GetComponent<Text>().text = "R" + (CalenderManager.round_count + 1).ToString();
 	}
 }

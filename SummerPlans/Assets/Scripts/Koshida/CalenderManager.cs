@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class CalenderManager : MonoBehaviour {
 
-    int _day_num = 31;
-    int first_num = -1;
-    int second_num = -1;
+    private int _day_num = 31;
+    private int first_num = -1;
+    private int second_num = -1;
 
-    public static int round_count = 0;
-    public static int select_num = 0;
-    public static bool turn_flag = true;
+    public static int round_count;
+    public static int select_num;
+    public static bool turn_flag;
 
-    GameObject[] _1Pday_obj;
-    GameObject[] _2Pday_obj;
+    private GameObject[] _1Pday_obj;
+    private GameObject[] _2Pday_obj;
 
     public  static int[] _1Pday_state;
     public static int[] _2Pday_state;
@@ -23,6 +23,10 @@ public class CalenderManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        round_count = 0;
+        select_num = 0;
+        turn_flag = true;
+
         _1Pday_obj = new GameObject[_day_num];
         _1Pday_state = new int[_day_num];
 
@@ -58,15 +62,16 @@ public class CalenderManager : MonoBehaviour {
             round_count++;
             if(round_count >= 3)
             {
+                round_count = 0;
                 SceneManager.LoadScene("Result");
             }
         }
-
-        CountDown.count = CountDown.round_time[round_count];
-
         first_num = -1;
         second_num = -1;
         select_num = 0;
+
+        CountDown.count = CountDown.round_time[round_count];
+
     }
 
     void CollationPlan()

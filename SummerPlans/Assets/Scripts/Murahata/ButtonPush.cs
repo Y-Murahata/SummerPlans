@@ -38,8 +38,6 @@ public class ButtonPush : MonoBehaviour
                 AnimationSprite();
                 //  シーン切り替えを遅延実行
                 Invoke("ChengeScene", stopTime);
-                
-
             }
             if (SceneManager.GetActiveScene().name == "Result")
             {

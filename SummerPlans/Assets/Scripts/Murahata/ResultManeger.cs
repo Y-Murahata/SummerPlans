@@ -46,13 +46,13 @@ public class ResultManeger : MonoBehaviour {
         //  スコアの多いプレイヤーを検出
         if (_1P_count > _2P_count)
         {
-            MVP_sign.transform.position = new Vector3(-4.851f, 2.47f);
+            MVP_sign.transform.position = new Vector3(-14.33f,4.73f);
             //  王冠マークを表示
             MVP_sign.SetActive(true);
         }
         else if(_1P_count < _2P_count)
         {
-            MVP_sign.transform.position = new Vector3(-4.851f, -0.09f);
+            MVP_sign.transform.position = new Vector3(-14.33f, 0.15f);
             //  王冠マークを表示
             MVP_sign.SetActive(true);
         }

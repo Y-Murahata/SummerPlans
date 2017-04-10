@@ -8,6 +8,8 @@ public class CountDown : MonoBehaviour {
 
     public static float count;
 
+    //public GameObject calender;
+
     GameObject cm_obj;
 
     CalenderManager cm;
@@ -15,9 +17,9 @@ public class CountDown : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cm_obj = GameObject.Find("CalendarManager");
-        round_time[0] = 60.0f;
-        round_time[1] = 40.0f;
-        round_time[2] = 20.0f;
+        round_time[0] = 61.0f;
+        round_time[1] = 41.0f;
+        round_time[2] = 21.0f;
 
         count = round_time[0];
 	}
@@ -29,6 +31,7 @@ public class CountDown : MonoBehaviour {
 
         if(count < 0)
         {
+            cm = cm_obj.GetComponent<CalenderManager>();
             cm.NextTurn();
         }
     }

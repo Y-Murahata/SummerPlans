@@ -6,6 +6,8 @@ public class ClickDay : MonoBehaviour {
 
     GameObject cm_obj;
 
+    public AudioClip[] audio_clip;
+    AudioSource audiosource;
 	// Use this for initialization
 	void Start () {
         cm_obj = GameObject.Find("CalendarManager");
@@ -27,7 +29,13 @@ public class ClickDay : MonoBehaviour {
                 CalenderManager cm = cm_obj.GetComponent<CalenderManager>();
 
                 cm.SelectDay(int.Parse(hit.collider.name));
+
+                audiosource = this.GetComponent<AudioSource>();
+                audiosource.clip = audio_clip[0];
+                audiosource.GetComponent<AudioSource>().Play();
+
             }
+
         }
 
         if(Input.GetMouseButtonDown(1))
@@ -43,6 +51,11 @@ public class ClickDay : MonoBehaviour {
                 CalenderManager cm = cm_obj.GetComponent<CalenderManager>();
 
                 cm.CancelPlan(int.Parse(hit.collider.name));
+
+                audiosource = this.GetComponent<AudioSource>();
+                audiosource.clip = audio_clip[1];
+                audiosource.GetComponent<AudioSource>().Play();
+
             }
         }
     }

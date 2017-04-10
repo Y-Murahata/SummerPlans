@@ -7,14 +7,16 @@ public class CalenderManager : MonoBehaviour {
     int _day_num = 31;
     int first_num = -1;
     int second_num = -1;
-    int select_num = 0;
+
+    public static int round_count = 0;
+    public static int select_num = 0;
     public static bool turn_flag = true;
 
     GameObject[] _1Pday_obj;
     GameObject[] _2Pday_obj;
 
-    int[] _1Pday_state;
-    int[] _2Pday_state;
+    public  static int[] _1Pday_state;
+    public static int[] _2Pday_state;
 
     // Use this for initialization
     void Start () {
@@ -38,6 +40,9 @@ public class CalenderManager : MonoBehaviour {
         first_num = -1;
         second_num = -1;
         select_num = 0;
+
+        CountDown.count = CountDown.round_time[round_count];
+
         if (turn_flag)
         {
             turn_flag = false;
@@ -46,6 +51,12 @@ public class CalenderManager : MonoBehaviour {
         {
             CollationPlan();
             turn_flag = true;
+
+            round_count++;
+            if(round_count >= 3)
+            {
+
+            }
         }
     }
 
@@ -53,6 +64,28 @@ public class CalenderManager : MonoBehaviour {
     {
         for (int i = 0; i < _day_num; i++)
         {
+            //1Pの選んだ予定が二日の予定の場合
+            if(IsTwoDaysPlan(i,true))
+            {
+                //2Pの選んだ先が二日の予定じゃなかった場合
+                if(!IsTwoDaysPlan(i,false))
+                {
+                    CancelPlan(i);
+                }
+            }
+
+            //1Pの選んだ予定が二日の予定の場合
+            if (IsTwoDaysPlan(i, false))
+            {
+                //2Pの選んだ先が二日の予定じゃなかった場合
+                if (!IsTwoDaysPlan(i, true))
+                {
+                    turn_flag = true;
+                    CancelPlan(i);
+                    turn_flag = false;
+                }
+            }
+
             if (_1Pday_state[i] + _2Pday_state[i] >= 2)
             {
                 if (_1Pday_state[i] == 0 || _2Pday_state[i] == 0) continue;
@@ -281,6 +314,73 @@ public class CalenderManager : MonoBehaviour {
             if (_2Pday_state[day_num] > 0)
             {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    //予定が二日のみかどうか
+    bool IsTwoDaysPlan(int day_num,bool player)
+    {
+        int two_days_ago = day_num - 2;
+        int in_two_days = day_num + 2;
+
+        if (two_days_ago < 0)
+            two_days_ago = 0;
+        if (in_two_days >= _day_num)
+            in_two_days = _day_num - 1;
+
+        //1Pの予定の検索
+        if (player)
+        {
+            //二日前が違う予定の場合
+            if (_1Pday_state[two_days_ago] != _1Pday_state[day_num])
+            {
+                //二日後が違う予定の場合
+                if (_1Pday_state[in_two_days] != _1Pday_state[day_num])
+                {
+                    //一日前が違う予定の場合
+                    if (_1Pday_state[two_days_ago + 1] != _1Pday_state[day_num])
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        //一日後が違う予定の場合
+                        if (_1Pday_state[in_two_days - 1] != _1Pday_state[day_num])
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            //二日前が違う予定の場合
+            if (_2Pday_state[two_days_ago] != _2Pday_state[day_num])
+            {
+                //二日後が違う予定の場合
+                if (_2Pday_state[in_two_days] != _2Pday_state[day_num])
+                {
+                    //一日前が違う予定の場合
+                    if (_2Pday_state[two_days_ago + 1] != _2Pday_state[day_num])
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        //一日後が違う予定の場合
+                        if (_2Pday_state[in_two_days - 1] != _2Pday_state[day_num])
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
         }
         return false;
